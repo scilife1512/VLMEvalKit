@@ -20,7 +20,7 @@ jobs:
         dataset: ["MMBench_V11_MINI MMStar_MINI AI2D_MINI","OCRBench_MINI"]
     container:
       image: vlmevalkit_2:a100
-      options: "--gpus=all --ipc=host -e https_proxy=$https_proxy -e http_proxy=$http_proxy --pull never"
+      options: "--gpus=all --ipc=host -e https_proxy=$https_proxy -e http_proxy=$http_proxy --pull never --user root"
       volumes:
         - /nvme/qa-caif-cicd/vlmevalkit_own_runner:/nvme/qa-caif-cicd/vlmevalkit_own_runner
         - /mnt/187:/mnt/187
