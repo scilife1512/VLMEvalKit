@@ -1,0 +1,16 @@
+name: lint
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: linux-a100
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install pre-commit hook
+        run: |
+          id
