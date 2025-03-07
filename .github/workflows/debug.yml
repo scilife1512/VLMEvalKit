@@ -9,6 +9,8 @@ concurrency:
 jobs:
   lint:
     runs-on: linux-a100
+    env:
+      LD_LIBRARY_PATH: /home/qa-caif-cicd/anaconda3/lib:$LD_LIBRARY_PATH
     steps:
       - name: info
         run: |
