@@ -13,6 +13,7 @@ jobs:
       - name: info
         run: |
           docker images
+          docker run -it --gpus all -v /nvme/qa-caif-cicd/wmk/VLMEvalKit:/nvme/qa-caif-cicd/wmk/VLMEvalKit -v /mnt/187:/mnt/187  -e https_proxy=$https_proxy -e http_proxy=$http_proxy vlmevalkit_2:a100 /bin/bash -c 'echo test'
           id
           echo $LD_LIBRARY_PATH
           export LD_LIBRARY_PATH=/home/qa-caif-cicd/anaconda3/lib:$LD_LIBRARY_PATH
