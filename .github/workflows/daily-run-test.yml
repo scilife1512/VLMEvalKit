@@ -29,7 +29,6 @@ jobs:
       - name: vlm_env
         run: |
           echo $https_proxy
-          curl google.com
           cd $GITHUB_WORKSPACE
           pip install -e .
       - name: evaluation_model
