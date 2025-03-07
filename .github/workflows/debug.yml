@@ -10,7 +10,12 @@ jobs:
   lint:
     runs-on: linux-a100
     steps:
-      - uses: actions/checkout@v2
+      - name: info
+        run: |
+          docker info
+          docker image
+          id
+      - uses: actions/checkout@v3
       - name: Install pre-commit hook
         run: |
           id
