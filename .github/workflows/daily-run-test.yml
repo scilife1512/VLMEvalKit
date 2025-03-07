@@ -16,31 +16,32 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [Qwen2-VL-7B-Instruct,InternVL2_5-8B,llava_onevision_qwen2_7b_si]
+        model: [Qwen/Qwen2-VL-7B-Instruct,OpenGVLab/InternVL2_5-8B,lmms-lab/llava-onevision-qwen2-7b-si]
         dataset: ["MMBench_V11_MINI MMStar_MINI AI2D_MINI","OCRBench_MINI"]
     container:
       image: kkscilife/vlmevalkit_2:a100
       options: "--gpus=all --ipc=host -e https_proxy=$https_proxy -e http_proxy=$http_proxy --pull never"
       volumes:
-        - /nvme/qa-caif-cicd/vlmevalkit_own_runner:/nvme/qa-caif-cicd/vlmevalkit_own_runner
         - /mnt/187:/mnt/187
     steps:
       - name: clone_repo
         uses: actions/checkout@v3
       - name: vlm_env
         run: |
-          id
-          echo $GITHUB_WORKSPACE
-          pwd
-          echo $http_proxy
           echo $https_proxy
+          curl google.com
           cd $GITHUB_WORKSPACE
           pip install -e .
       - name: evaluation_model
         run: |
-          pwd
-          #python run.py --dataset ${{matrix.dataset}} --model ${{matrix.model}}
+          ln -s /mnt/187/${{matrix.model}} .
+          if [[ "${{matrix.model}}" == "lmms-lab/llava-onevision-qwen2-7b-si" ]];then
+              model_name="llava_onevision_qwen2_7b_si"
+          else:
+              model_name=$(echo ${{matrix.model}} | awk -F'/' '{print $2}')
+          fi
+          python run.py --dataset ${{matrix.dataset}} --model $model_name
       - name: check_result
         run: |
-          pwd
+          echo $model_name
           #python .github/scripts/assert_score.py --result_dir ./outputs/
