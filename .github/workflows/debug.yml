@@ -12,8 +12,7 @@ jobs:
     steps:
       - name: info
         run: |
-          docker info
-          docker image
+          docker images
           id
       - uses: actions/checkout@v3
       - name: Install pre-commit hook
