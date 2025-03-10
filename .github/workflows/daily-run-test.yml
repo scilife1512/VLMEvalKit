@@ -30,17 +30,12 @@ jobs:
         run: |
           pip install -e .
           ln -s /mnt/187/${{matrix.model}} .
-          ls -al
           if [ "${{matrix.model}}" = "lmms-lab/llava-onevision-qwen2-7b-si" ];then
               model_name="llava_onevision_qwen2_7b_si"
           else
               model_name=$(echo ${{matrix.model}} | awk -F'/' '{print $2}')
           fi
           echo $model_name
-          ls ./$model_name
           nvidia-smi
-          #python run.py --data ${{matrix.dataset}} --model $model_name
-      - name: check_result
-        run: |
-          echo $BASE_SCORE
-          #python .github/scripts/assert_score.py --result_dir ./outputs/
+          python run.py --data ${{matrix.dataset}} --model $model_name
+          python .github/scripts/assert_score.py --dataset "${{matrix.dataset}}" --base_score $BASE_SCORE --model-name $model_name
