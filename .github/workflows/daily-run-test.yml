@@ -37,6 +37,7 @@ jobs:
           fi
           echo $model_name
           ls -l /mnt/187/${{matrix.model}}
+          nvidia-smi
           #python run.py --data ${{matrix.dataset}} --model $model_name
       - name: check_result
         run: |
