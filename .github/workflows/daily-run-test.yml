@@ -37,7 +37,7 @@ jobs:
               model_name=$(echo ${{matrix.model}} | awk -F'/' '{print $2}')
           fi
           echo $model_name
-          ls -l ./${{matrix.model}}
+          ls -l ./$model_name
           nvidia-smi
           #python run.py --data ${{matrix.dataset}} --model $model_name
       - name: check_result
