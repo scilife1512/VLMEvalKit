@@ -26,15 +26,9 @@ jobs:
     steps:
       - name: clone_repo
         uses: actions/checkout@v3
-      - name: vlm_env
-        run: |
-          echo $https_proxy
-          cd $GITHUB_WORKSPACE
-          pip install -e .
       - name: evaluation_model
         run: |
-          pip show vlmeval
-          pip install lmdeploy
+          pip install -e .
           ln -s /mnt/187/${{matrix.model}} .
           if [ "${{matrix.model}}" = "lmms-lab/llava-onevision-qwen2-7b-si" ];then
               model_name="llava_onevision_qwen2_7b_si"
