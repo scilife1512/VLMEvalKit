@@ -31,9 +31,10 @@ jobs:
           echo $https_proxy
           cd $GITHUB_WORKSPACE
           pip install -e .
-          a="test_b"
       - name: evaluation_model
         run: |
+          pip show vlmeval
+          pip install lmdeploy
           ln -s /mnt/187/${{matrix.model}} .
           if [ "${{matrix.model}}" = "lmms-lab/llava-onevision-qwen2-7b-si" ];then
               model_name="llava_onevision_qwen2_7b_si"
@@ -41,7 +42,6 @@ jobs:
               model_name=$(echo ${{matrix.model}} | awk -F'/' '{print $2}')
           fi
           echo $model_name
-          echo $a
           python run.py --data ${{matrix.dataset}} --model $model_name
       - name: check_result
         run: |
