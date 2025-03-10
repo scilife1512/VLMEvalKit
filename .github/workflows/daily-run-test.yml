@@ -34,12 +34,12 @@ jobs:
       - name: evaluation_model
         run: |
           ln -s /mnt/187/${{matrix.model}} .
-          if [[ "${{matrix.model}}" == "lmms-lab/llava-onevision-qwen2-7b-si" ]];then
+          if [ "${{matrix.model}}" = "lmms-lab/llava-onevision-qwen2-7b-si" ];then
               model_name="llava_onevision_qwen2_7b_si"
           else
               model_name=$(echo ${{matrix.model}} | awk -F'/' '{print $2}')
           fi
-          python run.py --dataset ${{matrix.dataset}} --model $model_name
+          python run.py --data ${{matrix.dataset}} --model $model_name
       - name: check_result
         run: |
           echo $model_name
