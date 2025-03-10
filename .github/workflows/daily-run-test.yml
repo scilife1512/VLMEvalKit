@@ -29,7 +29,8 @@ jobs:
       - name: evaluation_model
         run: |
           pip install -e .
-          ln -s /mnt/187/${{matrix.model}} .
+          pre_model=$(echo ${{matrix.model}} | awk -F'/' '{print $1}')
+          ln -s /mnt/187/$pre_model .
           if [ "${{matrix.model}}" = "lmms-lab/llava-onevision-qwen2-7b-si" ];then
               model_name="llava_onevision_qwen2_7b_si"
           else
