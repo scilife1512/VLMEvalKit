@@ -31,6 +31,7 @@ jobs:
           echo $https_proxy
           cd $GITHUB_WORKSPACE
           pip install -e .
+          a="test_b"
       - name: evaluation_model
         run: |
           ln -s /mnt/187/${{matrix.model}} .
@@ -39,6 +40,8 @@ jobs:
           else
               model_name=$(echo ${{matrix.model}} | awk -F'/' '{print $2}')
           fi
+          echo $model_name
+          echo $a
           python run.py --data ${{matrix.dataset}} --model $model_name
       - name: check_result
         run: |
