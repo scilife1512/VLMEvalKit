@@ -27,6 +27,7 @@ def validate_scores(dataset_list, assert_score, model_name):
             assert (
                 abs(cur_score - float(base_score)) <= 0.01
             ), f"{dataset} on {model_name}: cur_score is {cur_score}, base_score is {base_score}"
+        print(f"cur_score is {cur_score}, base_score is {base_score}")
 
 
 def parse_arguments():

@@ -1,10 +1,12 @@
-name: daily_run_test
+name: pr_run_test
 
 on:
-  push:
-  workflow_dispatch:
-  schedule:
-    - cron:  '56 14 * * *'
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
 
 env:
   BASE_SCORE: '{"MMBench_V11_MINI":{"Qwen2-VL-7B-Instruct":0.8727272727272727,"InternVL2_5-8B":0.8727272727272727,"llava_onevision_qwen2_7b_si":0.8363636363636363},"MMStar_MINI":{"Qwen2-VL-7B-Instruct":0.6266666666666667,"InternVL2_5-8B":0.6333333333333333,"llava_onevision_qwen2_7b_si":0.49333333333333335},"AI2D_MINI":{"Qwen2-VL-7B-Instruct":0.7854251012145749,"InternVL2_5-8B":0.8421052631578947,"llava_onevision_qwen2_7b_si":0.8178137651821862},"OCRBench_MINI":{"Qwen2-VL-7B-Instruct":16.6,"InternVL2_5-8B":16.4,"llava_onevision_qwen2_7b_si":12.9}}'
@@ -36,7 +38,6 @@ jobs:
           else
               model_name=$(echo ${{matrix.model}} | awk -F'/' '{print $2}')
           fi
-          echo $model_name
           nvidia-smi
           python run.py --data ${{matrix.dataset}} --model $model_name
           python .github/scripts/assert_score.py --dataset "${{matrix.dataset}}" --base_score $BASE_SCORE --model-name $model_name
