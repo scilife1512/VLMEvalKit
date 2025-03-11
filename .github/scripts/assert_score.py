@@ -31,7 +31,7 @@ def validate_scores(dataset_list, assert_score, model_name):
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="Validate model scores against CSV data")
+    parser = argparse.ArgumentParser(description="Validate model scores against csv/json data")
 
     parser.add_argument("--dataset", type=str, required=True, help="Space-separated list of datasets")
 
