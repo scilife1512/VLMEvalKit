@@ -35,3 +35,4 @@ jobs:
           use-quiet-mode: 'yes'
           use-verbose-mode: 'yes'
           config-file: '.github/md-link-config.json'
+          file-path: './README.md, ./LICENSE, ./README_zh-CN.md'
