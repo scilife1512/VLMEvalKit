@@ -4,3 +4,8 @@ repos:
   hooks:
     - id: markdown-link-check
       args: [-q,-c, .github/md-link-config.json]
+- repo: https://github.com/lycheeverse/lychee.git
+  rev: lychee-v0.18.1
+  hooks:
+    - id: lychee-docker
+      args: ["--no-progress", "."]
