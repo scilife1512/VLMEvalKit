@@ -17,7 +17,7 @@ jobs:
           use-quiet-mode: 'yes'
           use-verbose-mode: 'yes'
           config-file: '.github/md-link-config.json'
-          file-path: './README.md, ./LICENSE, ./README_zh-CN.md'
+          file-path: './README.md, ./LICENSE, ./docs/zh-CN/Development.md'
       - name: Install pre-commit hook
         run: |
           pip install pre-commit
