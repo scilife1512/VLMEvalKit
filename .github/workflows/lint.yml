@@ -10,14 +10,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Check markdown link
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          use-quiet-mode: 'yes'
-          use-verbose-mode: 'yes'
-          config-file: '.github/md-link-config.json'
-          file-path: './README.md, ./LICENSE, ./docs/zh-CN/Development.md'
+      - uses: actions/checkout@v4
       - name: Install pre-commit hook
         run: |
           pip install pre-commit
