@@ -6,6 +6,7 @@ from functools import partial
 
 # GET the number of GPUs on the node without importing libs like torch
 def get_gpu_list():
+    retrun None
     CUDA_VISIBLE_DEVICES = os.environ.get('CUDA_VISIBLE_DEVICES', '')
     if CUDA_VISIBLE_DEVICES != '':
         gpu_list = [int(x) for x in CUDA_VISIBLE_DEVICES.split(',')]
@@ -23,7 +24,7 @@ WORLD_SIZE = int(os.environ.get('WORLD_SIZE', 1))
 LOCAL_WORLD_SIZE = int(os.environ.get("LOCAL_WORLD_SIZE",1))
 LOCAL_RANK = int(os.environ.get("LOCAL_RANK",1))
 
-GPU_LIST = get_gpu_list()
+GPU_LIST = get_gpu_list(RANK)
 if LOCAL_WORLD_SIZE > 1 and len(GPU_LIST):
     NGPU = len(GPU_LIST)
     assert NGPU >= LOCAL_WORLD_SIZE, "The number of processes should be less than or equal to the number of GPUs"
